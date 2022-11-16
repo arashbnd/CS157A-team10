@@ -1,1 +1,19 @@
+body{
+    /* background-image: url("../img/background.jpg") */
 
+}
+/* for grid in home page */
+.grid-container-homepage {
+    display: grid;
+    grid-template-columns: max-content max-content max-content ; /* use max-content as many times as the number of columns you have  */
+    background-color: #ffffff;
+   justify-content: center;  /* https://www.digitalocean.com/community/tutorials/css-align-justify */
+    padding: 10px;
+  }
+  .grid-item-homepage {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px; 
+    font-size: 30px;
+    text-align: center;
+  }
