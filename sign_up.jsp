@@ -15,7 +15,7 @@
             <input type="text" class="form-control" name="first_name" placeholder="your first name..."/>
         </div>
 
-        // for adding last name into the employee db 
+        // for adding last name into the customer db
 
         <div class="form-group">
             <label> Last Name </label>
@@ -43,7 +43,7 @@ String b = request.getParameter("last_name");
 String db = "Kuan";
 String user; // assumes database name is the same as username
 user = "root";
-String password = "root";
+String password = "rootpass";
 PreparedStatement stmt = null;
 try {
            
