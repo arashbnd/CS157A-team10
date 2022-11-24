@@ -2,7 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java"%>
 
 <!DOCTYPE html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <html>
     <head>
@@ -25,6 +24,7 @@
             <th>Product</th>
             <th>Discription</th>
             <th>Price</th>
+            <th>Add items</th>
         </tr>
     </thead>
    
@@ -47,13 +47,22 @@
  
     %>
     <tr>
+    
         <td><%=rs.getString("Pname")%></td>
+        
         <td><%=rs.getString("Description")%></td>
+        
         <td><%=rs.getString("Price")%></td>
+   
+        <td><form action="bakery.jsp">
+	
+		<input type="submit" value="Add">
+		</form></td>
     </tr>
     <%
     }
     %>
     </tbody>
+    </table>
 </body>
 </html>
