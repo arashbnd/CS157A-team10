@@ -84,7 +84,7 @@
         <td><%=rs.getString("Price")%></td>
    
         <td><form action="bakery.jsp">
-		Quantity:  <input type="text" name="quantity"/>
+		Quantity:  <input type="text" name="Quantity"/>
 		<input type="submit" name="quantity" value="Add">
 		</form></td>
 		
@@ -94,8 +94,8 @@
     
 	//through result set, get the product id and quantity number
 	String id = rs.getString("ProductID");
-	String qnt = request.getParameter("quantity");
-	out.println("ProductId: " + id + " quantity: " + qnt);
+	String qnt = request.getParameter("Quantity"); // this is request because the value is coming from a button not db
+	out.println("ProductId: " + id + " Quanitity: " + qnt);
 	
     }
     %>
