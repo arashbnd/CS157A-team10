@@ -7,24 +7,48 @@
     <head>
         <meta charset="UTF-8">
     
-        <link rel="stylesheet" href="ROOT/main.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+          
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <title>Bakery</title>
     </head>
 
 <body>
 
+<header>
+    <div class="logo-container">
+        <img src="./images/logo.jpg" alt="">
+        <h4 class="logo">GreenMart</h4>
+    </div>
+    <!--- SEARCH BAR (START)--------------------------------------------------------------------->
+    <div class="topnav">
+        <div>
+            <form action = "./actionSearch.php" method = "post">
+                <input type="text" placeholder="Search your item..." name="searchItem" >
+                <button type="submit" class ="submit-button" ><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+    <!--- SEARCH BAR (END)--------------------------------------------------------------------------------->
+
+    <nav>
+        <ul class="nav-links-right">
+            <li class="nav-link"><a href="categories.html">Categories</a></li>
+            <li class="nav-link"><a href="Signout.html">Sign Out</a></li>
+            <li class="nav-link"><a href="Cart.html">Shopping Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
 <table border="1">
     <thead>
         <tr>
-            <th>Product</th>
-            <th>Discription</th>
-            <th>Price</th>
-            <th>Add items</th>
+            <th> Product </th>
+            <th> Discription </th>
+            <th> Price$ </th>
+            <th> Quanitity </th>
         </tr>
     </thead>
    
@@ -42,24 +66,37 @@
     
     Statement stmt = con.createStatement();
    
-    ResultSet rs = stmt.executeQuery("Select* from products");
-    while(rs.next()){
+ 	
  
+    
+    ResultSet rs = stmt.executeQuery("Select * from products where CategoryID = 1");
+    int image_counter = 0;
+    while(rs.next()){
+    image_counter++;
     %>
     <tr>
     
-        <td><%=rs.getString("Pname")%></td>
-        
+        <!--  <td><%=rs.getString("Pname")%></td> -->
+        <td><img src="images/category_1_products/<%=image_counter%>.jpg"style="width:5%;height:5%; padding:1 %; border:1%;">
+        <%=rs.getString("Pname")%></td>
         <td><%=rs.getString("Description")%></td>
         
         <td><%=rs.getString("Price")%></td>
    
         <td><form action="bakery.jsp">
-	
-		<input type="submit" value="Add">
+		Quantity:  <input type="text" name="quantity"/>
+		<input type="submit" name="quantity" value="Add">
 		</form></td>
+		
+		
     </tr>
     <%
+    
+	//through result set, get the product id and quantity number
+	String id = rs.getString("ProductID");
+	String qnt = request.getParameter("quantity");
+	out.println("ProductId: " + id + " quantity: " + qnt);
+	
     }
     %>
     </tbody>
