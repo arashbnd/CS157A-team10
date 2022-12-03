@@ -65,52 +65,67 @@
             <th class="six" action = "remove">Remove</th>
         </tr>
         </thead>
-        <%
-            String db = "vu";
-            String user; // assumes database name is the same as username
-            user = "root";
-            String password = "password";
-            try {
+        <form method="get" action="Confirmation.jsp">
+            <%
+                String db = "vu";
+                String user; // assumes database name is the same as username
+                user = "root";
+                String password = "password";
+                try {
 
-                java.sql.Connection con;
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM GreenMart.Products;");
-                while (rs.next()) {
-                    int ProductID = rs.getInt("ProductID");
-                    int CatID = rs.getInt("CategoryID");
-                    String PName = rs.getString("PName");
-                    int Inventory = rs.getInt("Quantity");
-                    BigDecimal PriceEach = rs.getBigDecimal("Price");
-                    String Descrip = rs.getString("Description");
-                    String Photo = rs.getString("Photo");
-                    String Add = rs.getString("ItemPageAdd");
-                    %>
-                    <tr class="production">
-                        <td><%=PName%></td>
-                        <td><img src=<%=Photo%> class="product-img"></td>
-                        <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-                        <td><%=PriceEach%></td>
-                        <td>$10.00</td>
-                        <td><span class="remove"><img src ="./img/trash-button.png" class ="remove-icon" alt="X"></span></td>
-                    </tr>
-        <%
-//                    out.println(PName + Photo + 1 + PriceEach +  "<br/><br/>");
+
+
+                    java.sql.Connection con;
+                    Class.forName("com.mysql.jdbc.Driver");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM GreenMart.Products;");
+
+                    int i=0;
+
+                    while (rs.next()) {
+                        int ProductID = rs.getInt("ProductID");
+                        int CatID = rs.getInt("CategoryID");
+                        String PName = rs.getString("PName");
+                        int Inventory = rs.getInt("Quantity");
+                        BigDecimal PriceEach = rs.getBigDecimal("Price");
+                        String Descrip = rs.getString("Description");
+                        String Photo = rs.getString("Photo");
+                        String Add = rs.getString("ItemPageAdd");
+
+                        if(session.getAttribute(String.valueOf(ProductID))==null) {
+                            continue;
+                        }
+                        i++;
+                        session.setAttribute("cntCart", String.valueOf(i));
+
+            %>
+            <tr class="production">
+                <td><%=PName%></td>
+                <td><img src=<%=Photo%> class="product-img"></td>
+                <td><input type="hidden" name="pid<%=String.valueOf(i)%>" value="<%=String.valueOf(ProductID)%>"/>
+                    <input name="qty<%=String.valueOf(i)%>" type="number" value="1" min="0" max="99" class="qtyinput"></td>
+                <td><%=PriceEach%></td>
+                <td>$10.00</td>
+                <td><span class="remove"><img src ="./img/trash-button.png" class ="remove-icon" alt="X"></span></td>
+            </tr>
+            <%
+                        //                    out.println(PName + Photo + 1 + PriceEach +  "<br/><br/>");
+                    }
+                    rs.close();
+                    stmt.close();
+                    con.close();
+                } catch(SQLException e) {
+                    System.out.println("SQLException caught: " + e.getMessage());
                 }
-                rs.close();
-                stmt.close();
-                con.close();
-            } catch(SQLException e) {
-                out.println("SQLException caught: " + e.getMessage());
-            }
-        %>
-        <tbody>
+            %>
+            <tbody>
 
-        <!-- checkout btn -->
-        <tr class="checkoutrow">
-            <td colspan="6" class="checkout"><button id="submitbtn">Place Order</button></td>
-        </tr>
+            <!-- checkout btn -->
+            <tr class="checkoutrow">
+                <td colspan="6" class="checkout"><button type="submit" id="submitbtn">Place Order</button></td>
+            </tr>
+        </form>
         </tbody>
     </table>
 </div>

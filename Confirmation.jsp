@@ -1,3 +1,9 @@
+
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.math.BigDecimal" %>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
@@ -40,6 +46,36 @@
 <div class="main-text">
     <h1>Order Confirmation</h1>
 </div>
+
+<%
+    String user; // assumes database name is the same as username
+    user = "root";
+    String password = "password";
+    try {
+
+
+
+        java.sql.Connection con;
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
+
+
+
+        for(int i=1;i<=Integer.valueOf(session.getAttribute("cntCart").toString());i++) {
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("update GreenMart.Products set Quantity=Quantity-"+request.getParameter("qty"+String.valueOf(i))
+                    +" where ProductID="+request.getParameter("pid"+String.valueOf(i)));
+            session.setAttribute(request.getParameter("pid"+String.valueOf(i)), null);
+            stmt.close();
+        }
+
+
+
+        con.close();
+    } catch(SQLException e) {
+        System.out.println("SQLException caught: " + e.getMessage());
+    }
+%>
 
 <section>
     <a>
