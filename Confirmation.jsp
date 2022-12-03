@@ -50,7 +50,7 @@
 <%
     String user; // assumes database name is the same as username
     user = "root";
-    String password = "password";
+    String password = "root";
     try {
 
 
