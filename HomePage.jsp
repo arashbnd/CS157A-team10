@@ -31,8 +31,8 @@
 
     <nav>
         <ul class="nav-links-right">
-            <li class="nav-link"><a href="categories.html">Categories</a></li>
-            <li class="nav-link"><a href="Signout.html">Sign Out</a></li>
+            <li class="nav-link"><a href="HomePage.jsp">Categories</a></li>
+            <li class="nav-link"><a href="Signout.jsp">Sign Out</a></li>
             <li class="nav-link"><a href="Cart.jsp">Shopping Cart</a></li>
         </ul>
     </nav>
