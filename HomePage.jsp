@@ -6,7 +6,7 @@
 <head>
     <title>Home Page</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -31,9 +31,9 @@
 
     <nav>
         <ul class="nav-links-right">
-            <li class="nav-link"><a href="categories.html">Categories</a></li>
-            <li class="nav-link"><a href="Signout.html">Sign Out</a></li>
-            <li class="nav-link"><a href="Cart.html">Shopping Cart</a></li>
+            <li class="nav-link"><a href="HomePage.jsp">Categories</a></li>
+            <li class="nav-link"><a href="Signout.jsp">Sign Out</a></li>
+            <li class="nav-link"><a href="Cart.jsp">Shopping Cart</a></li>
         </ul>
     </nav>
     <!-----------------------------MENU BAR (END)---------------------------------------------->
