@@ -54,8 +54,8 @@ public class LoginDao {
 
     public static UsersLogin findUser(Connection conn, String userName) throws SQLException {
 
-        String sql = "Select user_name, user_password from loginusers "
-                + " where user_name = ?";
+        String sql = "Select username, password from loginusers "
+                + " where username = ?";
 
 
         PreparedStatement pstm = conn.prepareStatement(sql);

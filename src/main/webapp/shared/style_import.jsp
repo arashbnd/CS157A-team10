@@ -19,3 +19,6 @@
 
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/styles.css">
+
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/css/main.css">

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class DBConnection {
-    private static String jdbcURL = "jdbc:mysql://localhost:3306/team10";
+    private static String jdbcURL = "jdbc:mysql://localhost:3306/GreenMart";
     private static String jdbcUsername = "root";
     private static String jdbcPassword = "root";
 
@@ -23,7 +23,7 @@ public class DBConnection {
             throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String connectionURL = "jdbc:mysql://localhost:3306/team10?autoReconnect=true&useSSL=false";
+        String connectionURL = "jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false";
 
         Connection conn = DriverManager.getConnection(connectionURL, userName, password);
         return conn;

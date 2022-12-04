@@ -12,30 +12,7 @@
 <body>
 
 <header>
-    <div class="logo-container">
-        <img src="./img/logo.jpg" alt="">
-        <h4 class="logo">GreenMart</h4>
-    </div>
-    <!--- SEARCH BAR (START)--------------------------------------------------------------------->
-    <div class="topnav">
-        <div>
-            <form action = "./actionSearch.php" method = "post">
-                <input type="text" placeholder="Search your item..." name="searchItem" >
-                <button type="submit" class ="submit-button" ><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-    </div>
-    <!--- SEARCH BAR (END)--------------------------------------------------------------------------------->
-
-    <nav>
-        <ul class="nav-links-right">
-            <li class="nav-link"><a href="categories.html">Categories</a></li>
-            <li class="nav-link"><a href="Signout.html">Sign Out</a></li>
-            <li class="nav-link"><a href="Cart.html">Shopping Cart</a></li>
-        </ul>
-    </nav>
-    <!-----------------------------MENU BAR (END)---------------------------------------------->
-
+    <jsp:include page="../header.jsp" />
 </header>
 <div class="login">
     <form action="<%=request.getContextPath()%>/login" method="post">

@@ -6,51 +6,25 @@
 <head>
     <title>Home Page</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <jsp:include page="/shared/style_import.jsp" />
 </head>
 
 <body>
 <!-----------------------------MENU BAR (START)------------------------------------------->
 <header>
-    <div class="logo-container">
-        <img src="./images/logo.jpg" alt="">
-        <h4 class="logo">GreenMart</h4>
-    </div>
-    <!--- SEARCH BAR (START)--------------------------------------------------------------------->
-    <div class="topnav">
-        <div>
-            <form action = "./actionSearch.php" method = "post">
-                <input type="text" placeholder="Search your item..." name="searchItem" >
-                <button type="submit" class ="submit-button" ><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-    </div>
-    <!--- SEARCH BAR (END)--------------------------------------------------------------------------------->
-
-    <nav>
-        <ul class="nav-links-right">
-            <li class="nav-link"><a href="HomePage.jsp">Categories</a></li>
-            <li class="nav-link"><a href="Signout.jsp">Sign Out</a></li>
-            <li class="nav-link"><a href="Cart.jsp">Shopping Cart</a></li>
-        </ul>
-    </nav>
-    <!-----------------------------MENU BAR (END)---------------------------------------------->
-
+    <jsp:include page="../header.jsp" />
 </header>
 
 <body>
 <table border="1">
         <%
-                String db = "vu";
                 String user; // assumes database name is the same as username
                 user = "root";
-                String password = "password";
+                String password = "root";
                 try {
 
                     java.sql.Connection con;
-                    Class.forName("com.mysql.jdbc.Driver");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT * FROM GreenMart.Category;");

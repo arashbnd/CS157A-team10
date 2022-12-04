@@ -11,19 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import sjsu.edu.market.utils.MyUtils;
 
-@WebServlet(urlPatterns = { "/home"})
-public class HomeController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet(urlPatterns = { "/cart"})
+public class CartController extends HttpServlet {
 
-    public HomeController() {
+    public CartController() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/view/HomePage.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/view/Cart.jsp");
 
         dispatcher.forward(request, response);
 

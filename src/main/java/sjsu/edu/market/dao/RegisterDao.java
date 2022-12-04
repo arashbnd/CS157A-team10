@@ -9,8 +9,8 @@ import sjsu.edu.market.model.UsersRegister;
 public class RegisterDao {
 
     public static void registerUsers(UsersRegister users) throws ClassNotFoundException {
-        String INSERT_USERS_SQL = "INSERT INTO USERS"
-                + " (username, password, email, firstname, lastname, phone, address) VALUES "
+        String INSERT_USERS_SQL = "INSERT INTO USER"
+                + " (FirstName, LastName, Phone, Email, Address, UserName, Password) VALUES "
                 + " (?, ?, ?, ?, ?, ?, ?);";
         try (
 
@@ -18,13 +18,13 @@ public class RegisterDao {
 
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setString(1, users.getUsername());
-            preparedStatement.setString(2, users.getPassword());
-            preparedStatement.setString(3, users.getEmail());
-            preparedStatement.setString(4, users.getFirstName());
-            preparedStatement.setString(5, users.getLastName());
-            preparedStatement.setString(6, users.getPhone());
-            preparedStatement.setString(7, users.getAddress());
+            preparedStatement.setString(1, users.getFirstName());
+            preparedStatement.setString(2, users.getLastName());
+            preparedStatement.setString(3, users.getPhone());
+            preparedStatement.setString(4, users.getEmail());
+            preparedStatement.setString(5, users.getAddress());
+            preparedStatement.setString(6, users.getUsername());
+            preparedStatement.setString(7, users.getPassword());
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -48,8 +48,8 @@ public class RegisterDao {
     }
 
     public static void registerLogin() throws ClassNotFoundException, SQLException {
-        String INSERT_LOGIN_SQL = "insert into LOGINUSERS select distinct(username), password from USERS"
-                + " where NOT EXISTS(Select username from loginusers where loginusers.username = users.username)";
+        String INSERT_LOGIN_SQL = "insert into LOGINUSERS select distinct(username), password from USER"
+                + " where NOT EXISTS(Select username from loginusers where loginusers.username = user.username)";
 
         Connection connection = DBConnection.getConnection();
         PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_LOGIN_SQL);
@@ -61,7 +61,7 @@ public class RegisterDao {
 
     public boolean findByUsername(String username) {
 
-        String statementQuery = ("select count(*) from loginusers where user_name = ?");
+        String statementQuery = ("select count(*) from loginusers where username = ?");
         try (
                 Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(statementQuery)) {
@@ -83,7 +83,7 @@ public class RegisterDao {
     }
 
     public boolean findByLogin(String username, String password) {
-        String statementQuery = ("select password from loginusers where user_name = ?");
+        String statementQuery = ("select password from loginusers where username = ?");
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(statementQuery)) {
             preparedStatement.setString(1, username);
