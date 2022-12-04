@@ -54,6 +54,7 @@
         <h1>Shopping Cart</h1>
     </header>
 </div>
+
 <div class="page">
     <table class="cart">
         <thead>

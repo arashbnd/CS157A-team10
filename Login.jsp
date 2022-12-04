@@ -43,6 +43,7 @@
      if(rs.getString(2).equals(pwd))
         {
         out.println("welcome shopping in GreenMart"+userid);
+        // response.sendRedirect("welcome.html");
 
      }
          else
