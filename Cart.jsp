@@ -81,9 +81,10 @@
 
                     java.sql.Connection con;
                     Class.forName("com.mysql.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
-                    Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM GreenMart.Products;");
+                   // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3307/BAHRAMIANDEHKORDI?autoReconnect=true&useSSL=false","root", "root");
+                  Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM Products;");
 
                     int i=0;
 
@@ -124,7 +125,7 @@
                     stmt.close();
                     con.close();
                 } catch(SQLException e) {
-                    System.out.println("SQLException caught: " + e.getMessage());
+                    out.println("SQLException caught: " + e.getMessage());
                 }
             %>
 

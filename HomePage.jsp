@@ -51,17 +51,19 @@
 
                     java.sql.Connection con;
                     Class.forName("com.mysql.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
-                    Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM GreenMart.Category;");
+                   // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
+                   con = DriverManager.getConnection("jdbc:mysql://localhost:3307/BAHRAMIANDEHKORDI?autoReconnect=true&useSSL=false","root", "root"); 
+                   Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM Category;");
                     while (rs.next()) {
                         int ID = rs.getInt("CategoryID");
-                        String Name = rs.getString("CName");
+                        //String Name = rs.getString("CName");
+                        String Name = rs.getString("Name");
                         String Photo = rs.getString("DescripPhoto");
                         String Add = rs.getString("CatAdd");
                         %>
     <div>
-        <a href=<%=Add%> class="categories"> <img src = <%=Photo%>> <h3><%=Name%></h3></a>
+        <a href=<%=Add%> class="categories"> <img src = <%=Photo%>> <h3><%=Name%></h3></a>  -->
     </div>
         <%
                     }

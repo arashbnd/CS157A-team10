@@ -48,7 +48,7 @@
         <a href="cat_beverages.jsp" class="categories"><img src="Categories-Picture/beverages.jpg"><h3>Beverages</h3></a>
     </div>
     <div class="column">
-        <a href="cat_dairy.jsp" class="categories"><img src="Categories-Picture/daily.jpg"><h3>Dairy</h3></a>
+        <a href="Dairy.jsp" class="categories"><img src="Categories-Picture/daily.jpg"><h3>Dairy</h3></a>
     </div>
     <div class="column">
         <a href="cat_meat.jsp" class="categories"><img src="Categories-Picture/deli.jpg"><h3>Meat</h3></a>
