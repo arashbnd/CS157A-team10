@@ -68,7 +68,7 @@
 </div>
 <div class="row">
     <div class = "column">
-        <a href="cat_bakery.jsp" class="categories"><img src="Categories-Picture/bakery.jpg"><h3>Bakery</h3></a>
+        <a href="bakery.jsp" class="categories"><img src="Categories-Picture/bakery.jpg"><h3>Bakery</h3></a>
     </div>
     <div class="column">
         <a href="cat_frozen.jso" class="categories"><img src="Categories-Picture/frozen.jpg"><h3>Frozen</h3></a>
