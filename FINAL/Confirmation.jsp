@@ -53,63 +53,71 @@
     user = "root";
     String password = "password";
 //    try {
+    java.sql.Connection con;
+    Class.forName("com.mysql.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
+    Statement stmt0 = con.createStatement();
+    ResultSet rs0 = stmt0.executeQuery("select max(OrderId)+1 mxOrdId from `Order`");
+    rs0.next();
+    int mxOrdId = rs0.getInt("mxOrdId");
+    Date date = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    String strDate = formatter.format(date);
+    Statement stmt1 = con.createStatement();
+    String q1 = "insert into `Order`(OrderID,UserID,Status,CreatedDate) values"
+            + " ("
+            + mxOrdId + ","
+            + "1,"
+            + "'Processing',"
+            + "'" + strDate + "'"
+            + ")";
+    stmt1.executeUpdate(q1);
+    System.out.println(q1);
+    Statement stmt2 = con.createStatement();
+    String q2 = "insert into cart(TotalPrice,OrderID) values"
+            + " ("
+            + request.getParameter("total") + ","
+            + mxOrdId
+            + ")";
+    stmt2.executeUpdate(q2);
+
+    Statement stmt4 = con.createStatement();
+    ResultSet rs4 = stmt4.executeQuery("select max(CartDetailsID)+1 mxCartDetailsId from `CartDetails`");
+    rs4.next();
+    int mxCartDetailsID = rs4.getInt("mxCartDetailsId");
 
 
-
-        java.sql.Connection con;
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/GreenMart?autoReconnect=true&useSSL=false",user, password);
-
-
-        Statement stmt0 = con.createStatement();
-        ResultSet rs0 = stmt0.executeQuery("select max(OrderId)+1 mxOrdId from `Order`");
-        rs0.next();
-        int mxOrdId = rs0.getInt("mxOrdId");
-
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = formatter.format(date);
-
-        Statement stmt1 = con.createStatement();
-        String q1 = "insert into `Order`(OrderID,UserID,Status,CreatedDate) values"
+    for(int i=1; i<= (int)session.getAttribute("cntCart"); i++) {
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("update GreenMart.Products set Quantity=Quantity-"+request.getParameter("qty"+String.valueOf(i))
+                +" where ProductID="+request.getParameter("pid"+String.valueOf(i)));
+        session.setAttribute(request.getParameter("pid"+String.valueOf(i)), null);
+        stmt.close();
+        Statement stmt3 = con.createStatement();
+        String q3 = "insert into cartdetails(CartDetailsID, ProductID,Quantity) values"
                 + " ("
-                + mxOrdId + ","
-                + "1,"
-                + "'Processing',"
-                + "'" + strDate + "'"
+                + mxCartDetailsID + ","
+                + request.getParameter("pid"+String.valueOf(i)) + ","
+                + request.getParameter("qty"+String.valueOf(i))
                 + ")";
-        stmt1.executeUpdate(q1);
-        System.out.println(q1);
+        stmt3.executeUpdate(q3);
+        stmt3.close();
+    }
 
-        Statement stmt2 = con.createStatement();
-        String q2 = "insert into cart(TotalPrice,OrderID) values"
-                + " ("
-                + request.getParameter("total") + ","
-                + mxOrdId
-                + ")";
-        stmt2.executeUpdate(q2);
+    Statement stmt5 = con.createStatement();
+    ResultSet rs5 = stmt5.executeQuery("select max(CartID) mxCartId from `Cart`");
+    rs5.next();
+    int mxCartID = rs5.getInt("mxCartId");
 
+    Statement stmt6 = con.createStatement();
+    String q6 = "insert into Detailed_By(CartID,CartDetailsID) values"
+            + " ("
+            + mxCartID + ","
+            + mxCartDetailsID
+            + ")";
+    stmt6.executeUpdate(q6);
 
-        for(int i=1; i<= (int)session.getAttribute("cntCart"); i++) {
-            Statement stmt = con.createStatement();
-            stmt.executeUpdate("update GreenMart.Products set Quantity=Quantity-"+request.getParameter("qty"+String.valueOf(i))
-                    +" where ProductID="+request.getParameter("pid"+String.valueOf(i)));
-            session.setAttribute(request.getParameter("pid"+String.valueOf(i)), null);
-            stmt.close();
-
-            Statement stmt3 = con.createStatement();
-            String q3 = "insert into cartdetails(ProductID,Quantity) values"
-                    + " ("
-                    + request.getParameter("pid"+String.valueOf(i)) + ","
-                    + request.getParameter("qty"+String.valueOf(i))
-                    + ")";
-            stmt3.executeUpdate(q3);
-            stmt3.close();
-        }
-
-
-
-        con.close();
+    con.close();
 //    } catch(SQLException e) {
 //        System.out.println("SQLException caught: " + e.getMessage());
 //    }
